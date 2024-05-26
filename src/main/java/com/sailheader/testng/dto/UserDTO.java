@@ -15,6 +15,4 @@ public class UserDTO {
     String name;//姓名
     Integer age;//年龄
     String email;//年龄
-    String deptId;//部门id
-    Integer isDeleted;//是否删除
 }

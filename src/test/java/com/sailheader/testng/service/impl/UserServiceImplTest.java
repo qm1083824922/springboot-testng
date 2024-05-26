@@ -1,6 +1,7 @@
 package com.sailheader.testng.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sailheader.testng.dto.UserDTO;
 import com.sailheader.testng.entity.Dept;
 import com.sailheader.testng.entity.User;
 import com.sailheader.testng.mapper.UserMapper;
@@ -94,5 +95,55 @@ public class UserServiceImplTest {
         assertEquals(result.getName(), "张三");
         assertNull(result.getDeptId(), "Dept ID should be null when no departments are associated.");
         assertNull(result.getDeptName(), "Dept Name should be null when no departments are associated.");
+    }
+
+    @Test
+    public void testAddUser() {
+        // Creating a mock UserDTO object
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName("John Doe");
+        userDTO.setEmail("john@example.com");
+
+        // Mocking the behavior of save() method to return true
+        when(userMapper.insert(any(User.class))).thenReturn(1);
+
+        // Calling the addUser() method
+        boolean result = userService.addUser(userDTO);
+
+        // Asserting that addUser() method returns true
+        assertTrue(result);
+    }
+
+    @Test
+    public void testGetUserById_UserNotFound() {
+        // Mocking the behavior of getById() method to return null
+        when(userService.getById(anyLong())).thenReturn(null);
+
+        // Calling the getUserById() method with a non-existing user ID
+        UserVO userVO = userService.getUserById(1L);
+
+        // Asserting that userVO is null when user is not found
+        assertNull(userVO);
+    }
+
+    @Test
+    public void testGetUserById_UserFound() {
+        // Mocking the behavior of getById() method to return a user
+        User user = new User();
+        user.setId(1L);
+        user.setName("John Doe");
+        when(userService.getById(anyLong())).thenReturn(user);
+
+        // Mocking the behavior of getDeptByUserId() method to return an empty list
+        when(deptService.getDeptByUserId(anyLong())).thenReturn(Collections.emptyList());
+
+        // Calling the getUserById() method with an existing user ID
+        UserVO userVO = userService.getUserById(1L);
+
+        // Asserting that userVO is not null and contains correct user details
+        assertNotNull(userVO);
+        assertEquals(userVO.getId(), user.getId());
+        assertEquals(userVO.getName(), user.getName());
+        // Add more assertions if needed for other fields
     }
 }

@@ -12,7 +12,7 @@ spring:
 logging:
   level:
     com.sailheader.testng: debug
-# MyBatis-Plus 配置
+# MyBatis-Plus ??
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

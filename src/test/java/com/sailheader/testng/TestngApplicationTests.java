@@ -6,11 +6,12 @@ import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 import static org.testng.Assert.assertEquals;
 
 @SpringBootTest
-class TestngApplicationTests {
+class TestngApplicationTests{
 
     @Autowired
     private UserService userService;

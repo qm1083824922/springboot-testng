@@ -1,5 +1,6 @@
 package com.sailheader.testng.controller;
 
+import com.sailheader.testng.dto.UserDTO;
 import com.sailheader.testng.entity.User;
 import com.sailheader.testng.service.UserService;
 import com.sailheader.testng.vo.UserVO;
@@ -26,4 +27,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    public Boolean addUser(UserDTO userDTO) {
+        return userService.addUser(userDTO);
+    }
 }
