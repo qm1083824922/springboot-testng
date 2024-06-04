@@ -37,6 +37,7 @@ public class UserServiceImplTest {
     private DeptService deptService;
 
     @InjectMocks
+    @Spy
     private UserServiceImpl userService;
 
     @BeforeMethod
@@ -116,6 +117,7 @@ public class UserServiceImplTest {
         user.setId(1L);
 
         when(userMapper.insert(any(User.class))).thenReturn(1);
+        //doReturn(true).when(userMapper.updateById())
 
         Boolean result = userService.addUser(userDTO);
 
@@ -136,19 +138,21 @@ public class UserServiceImplTest {
         verify(userMapper, times(1)).updateById(any(User.class));
     }
 
-//    @Test
-//    public void testSubmit() {
-//        UserDTO userDTO = new UserDTO();
-//        userDTO.setId(1L);
-//
-//        List<UserDTO> userDTOList = Collections.singletonList(userDTO);
-//        List<User> userList = Collections.singletonList(new User());
-//
-//        when(userService.saveBatch(anyList())).thenReturn(true);
-//
-//        Boolean result = userService.submit(userDTOList);
-//
-//        Assert.assertTrue(result);
-//        verify(userService, times(1)).saveBatch(anyList());
-//    }
+    @Test
+    public void testSubmit() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(1L);
+
+        List<UserDTO> userDTOList = Collections.singletonList(userDTO);
+        List<User> userList = Collections.singletonList(new User());
+
+        when(userMapper.insert(any(User.class))).thenReturn(1);
+
+        //doReturn(true).when(userService.saveBatch(anyList()));
+
+        Boolean result = userService.submit(userDTOList);
+
+        Assert.assertTrue(result);
+        verify(userService, times(1)).saveBatch(anyList());
+    }
 }
