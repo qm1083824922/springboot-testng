@@ -12,7 +12,20 @@ import lombok.experimental.FieldDefaults;
 @Accessors(chain = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDTO {
-    String name;//姓名
-    Integer age;//年龄
-    String email;//年龄
+    /**
+     * ID
+     */
+    Long id;
+    /**
+     * 姓名
+     */
+    String name;
+    /**
+     * 年龄
+     */
+    Integer age;
+    /**
+     * 年龄
+     */
+    String email;
 }

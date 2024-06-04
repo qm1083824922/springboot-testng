@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DeptService extends IService<Dept> {
     List<Dept> getDeptByUserId(Long id);
+
+    int updateByDeptIdAndUserId(Long deptId,Long userId);
 }

@@ -32,4 +32,9 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
         return this.listByIds(deptIds);
     }
 
+    @Override
+    public int updateByDeptIdAndUserId(Long deptId,Long userId) {
+        return this.baseMapper.updateByDeptIdAndUserId(deptId,userId);
+    }
+
 }

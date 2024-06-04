@@ -5,6 +5,8 @@ import com.sailheader.testng.dto.UserDTO;
 import com.sailheader.testng.entity.User;
 import com.sailheader.testng.vo.UserVO;
 
+import java.util.List;
+
 public interface UserService extends IService<User> {
     /**
      *  根据id获取用户信息
@@ -14,4 +16,10 @@ public interface UserService extends IService<User> {
     UserVO getUserById(Long id);
 
     Boolean addUser(UserDTO userDTO);
+
+    Boolean updateUser(UserDTO userDTO);
+
+    Boolean submit(List<UserDTO> userDTOList);
+
+    int add(String name, Integer age, List<String> features);
 }

@@ -11,18 +11,22 @@ import com.sailheader.testng.service.DeptService;
 import com.sailheader.testng.service.UserService;
 import com.sailheader.testng.vo.UserVO;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -60,5 +64,37 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = new User();
         BeanUtils.copyProperties(userDTO,user);
         return this.save(user);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Boolean updateUser(UserDTO userDTO) {
+        User user = new User();
+        BeanUtils.copyProperties(userDTO, user);
+        return this.updateById(user);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Boolean submit(List<UserDTO> userDTOList) {
+        List<User> userList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(userDTOList)) {
+            userList = userDTOList.stream().map(item -> {
+                User user = new User();
+                BeanUtils.copyProperties(item, user);
+                return user;
+            }).collect(Collectors.toList());
+        }
+        return this.saveOrUpdateBatch(userList);
+    }
+
+    @Override
+    public int add(String name, Integer age, List<String> features) {
+        return 1;
+    }
+
+    public int getNumber() {
+        System.out.println("getNumber");
+        return 0;
     }
 }

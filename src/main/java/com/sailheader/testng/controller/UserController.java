@@ -7,10 +7,9 @@ import com.sailheader.testng.vo.UserVO;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 用户接口
@@ -27,7 +26,18 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @PostMapping("/addUser")
     public Boolean addUser(UserDTO userDTO) {
         return userService.addUser(userDTO);
+    }
+
+    @GetMapping("/updateUser")
+    public Boolean updateUser(UserDTO userDTO) {
+        return userService.updateUser(userDTO);
+    }
+
+    @PostMapping("/addUserList")
+    public Boolean addUserList(List<UserDTO> userDTOList) {
+        return userService.submit(userDTOList);
     }
 }
