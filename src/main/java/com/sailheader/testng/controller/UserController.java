@@ -25,7 +25,6 @@ public class UserController {
     public UserVO getUser(@PathVariable("id") Long id){
         return userService.getUserById(id);
     }
-
     @PostMapping("/addUser")
     public Boolean addUser(UserDTO userDTO) {
         return userService.addUser(userDTO);
