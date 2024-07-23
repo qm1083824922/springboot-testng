@@ -16,3 +16,22 @@ logging:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+rocketmq:
+  name-server: 127.0.0.1:9876
+  # 生产者
+  producer:
+    group: boot_group_1
+    # 消息发送超时时间
+    send-message-timeout: 3000
+    # 消息最大长度4M
+    max-message-size: 4096
+    # 消息发送失败重试次数
+    retry-times-when-send-failed: 3
+    # 异步消息发送失败重试次数
+    retry-times-when-send-async-failed: 2
+  # 消费者
+  consumer:
+    group: boot_group_1
+    # 每次提取的最大消息数
+    pull-batch-size: 5

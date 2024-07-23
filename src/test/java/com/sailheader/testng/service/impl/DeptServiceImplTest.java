@@ -7,6 +7,7 @@ import com.sailheader.testng.service.UserDeptService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.springframework.util.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -20,14 +21,15 @@ import static org.mockito.Mockito.*;
 
 public class DeptServiceImplTest {
 
-    @Mock
-    private UserDeptService userDeptService;
+    @InjectMocks
+    @Spy
+    private DeptServiceImpl deptServiceImpl;
 
     @Mock
     private DeptMapper deptMapper;
 
-    @InjectMocks
-    private DeptServiceImpl deptServiceImpl;
+    @Mock
+    private UserDeptService userDeptService;
 
     @BeforeMethod
     public void setUp() {
@@ -59,13 +61,12 @@ public class DeptServiceImplTest {
 
         Assert.assertEquals(result.size(), 3);
         verify(userDeptService, times(1)).getDeptIdListByUserId(userId);
-        verify(deptServiceImpl, times(1)).listByIds(deptIds);
+        verify(deptServiceImpl, times(2)).listByIds(deptIds);
     }
 
     @Test
     public void testGetDeptByUserId_withEmptyDeptIds() {
         Long userId = 1L;
-
         when(userDeptService.getDeptIdListByUserId(userId)).thenReturn(Collections.emptyList());
 
         List<Dept> result = deptServiceImpl.getDeptByUserId(userId);
