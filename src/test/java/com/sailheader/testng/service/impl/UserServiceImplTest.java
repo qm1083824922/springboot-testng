@@ -144,15 +144,9 @@ public class UserServiceImplTest {
         userDTO.setId(1L);
 
         List<UserDTO> userDTOList = Collections.singletonList(userDTO);
-        //List<User> userList = Collections.singletonList(new User());
-
-        //when(userMapper.insert(any(User.class))).thenReturn(1);
-
-        //doReturn(1).when(userMapper).insert(any(User.class));
         doReturn(true).when(userService).saveOrUpdateBatch(anyList());
         Boolean result = userService.submit(userDTOList);
 
         Assert.assertTrue(result);
-        //verify(userService, times(1)).saveBatch(anyList());
     }
 }
