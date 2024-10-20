@@ -21,6 +21,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Field;
+import static org.mockito.Mockito.*;
+import static org.testng.Assert.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -112,6 +116,7 @@ public class UserServiceImplTest {
         user.setId(1L);
 
         when(userMapper.insert(any(User.class))).thenReturn(1);
+        //doReturn(true).when(userMapper.updateById())
 
         Boolean result = userService.addUser(userDTO);
 

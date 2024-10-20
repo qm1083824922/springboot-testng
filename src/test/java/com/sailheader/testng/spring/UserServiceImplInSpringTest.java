@@ -31,7 +31,6 @@ import static org.testng.Assert.assertNotNull;
 /**
  * InjectMocks不能注入父类的属性
  */
-@SpringBootTest(classes = TestngApplication.class)
 public class UserServiceImplInSpringTest {
 
     @Resource
