@@ -10,6 +10,7 @@ import com.sailheader.testng.mapper.UserMapper;
 import com.sailheader.testng.service.DeptService;
 import com.sailheader.testng.service.UserService;
 import com.sailheader.testng.vo.UserVO;
+import com.sailheader.testng.vo.req.UserRegisterVo;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -91,6 +92,44 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public int add(String name, Integer age, List<String> features) {
         return 1;
+    }
+
+    @Override
+    public void register(UserRegisterVo userRegisterVo) {
+
+    }
+
+    /**
+     * 校验用户是否合法
+     *
+     * @param name     用户名
+     * @param password 密码
+     * @return 是否合法, 合法返回true, 否则返回false
+     */
+    @Override
+    public boolean isValid(String name, String password) {
+        return false;
+    }
+
+    /**
+     * 校验用户是否存在,校验失败抛出异常
+     *
+     * @param name 用户名
+     */
+    @Override
+    public void checkValid(String name) {
+
+    }
+
+    /**
+     * 根据用户名统计用户数量
+     *
+     * @param username 用户名
+     * @return 用户数量
+     */
+    @Override
+    public long countByUserName(String username) {
+        return this.lambdaQuery().eq(User::getName, username).count();
     }
 
     public int getNumber() {

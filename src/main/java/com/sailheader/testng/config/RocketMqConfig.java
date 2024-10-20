@@ -6,13 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author Porsche
- * @Date 2024/6/30 17:07
- */
-
 @Configuration
-public class RocketMqConfig {
+public class RocketMQConfig {
 
     @Value("${rocketmq.name-server}")
     private String nameServer;

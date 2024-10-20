@@ -1,5 +1,6 @@
 package com.sailheader.testng.util;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.testng.Assert;
@@ -24,5 +25,11 @@ public class HttpUtilTest {
         //mockStatic关闭之后，再次调用，结果就没有被mock了
         //String result = HttpUtil.doPost("http://www.baidu.com", "hello");
         //Assert.assertEquals("第三方系统返回的结果：", result);
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 3; i++) {
+            System.out.println(IdWorker.getId());
+        }
     }
 }

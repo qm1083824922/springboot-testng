@@ -55,9 +55,6 @@ public class UserServiceImplTest {
         baseMapperField.set(userService, userMapper);
 
         TableInfoHelper.initTableInfo(new MapperBuilderAssistant(new MybatisConfiguration(),""),User.class);
-
-        // 重置模拟对象
-        reset(userMapper, deptService);
     }
 
     @Test
