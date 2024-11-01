@@ -1,0 +1,14 @@
+在服务启动后，strategyMap 会包含 QuantityUnpackStrategy、SNUnpackStrategy 和 SubPackingUnpackStrategy 这三个策略的原因是因为 Spring 框架的自动装配机制。  具体来说：
+1.策略类的定义：
+QuantityUnpackStrategy、SNUnpackStrategy 和 SubPackingUnpackStrategy 都实现了 PackingScanStrategy 接口。
+这些类都使用了 @Component 注解，这意味着它们会被 Spring 容器自动扫描并注册为 Spring Bean。
+
+2.自动装配：
+在 PackingScanServiceImpl 类中，使用了 @Autowired 注解来注入一个 Map<String, PackingScanStrategy> 类型的 strategyMap。
+Spring 会自动将所有实现了 PackingScanStrategy 接口的 Bean 注入到这个 Map 中，键是 @Component 注解中指定的名称，值是相应的 Bean 实例。
+
+3.服务启动：
+当 Spring Boot 应用启动时，Spring 容器会扫描所有的类并根据注解创建相应的 Bean。
+由于 QuantityUnpackStrategy、SNUnpackStrategy 和 SubPackingUnpackStrategy 都被标记为 @Component，它们会被自动注册为 Bean。
+Spring 容器会将这些 Bean 注入到 PackingScanServiceImpl 的 strategyMap 中。
+因此，在服务启动后，strategyMap 会包含这三个策略。
